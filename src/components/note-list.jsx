@@ -1,7 +1,11 @@
 function NoteItem(props) {
   const { note } = props;
 
-  return <li key={note.id}>{note.content}</li>;
+  return (
+    <li key={note.id}>
+      {note.content} {note.important && <strong>important</strong>}
+    </li>
+  );
 }
 
 export function NoteList(props) {
