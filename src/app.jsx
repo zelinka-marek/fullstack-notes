@@ -5,6 +5,20 @@ import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
 import { getNotes, updateNote } from "./services/note";
 
+function Footer() {
+  const style = {
+    color: "green",
+    fontSize: 14,
+    marginTop: 12,
+  };
+
+  return (
+    <footer style={style}>
+      <em>FullStack - Note, Marek Zelinka, &copy; 2023 </em>
+    </footer>
+  );
+}
+
 export function App() {
   const [notes, setNotes] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -57,6 +71,7 @@ export function App() {
       />
       <h2>Add Note</h2>
       <NoteForm onSubmit={addNote} />
+      <Footer />
     </>
   );
 }
