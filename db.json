@@ -27,7 +27,7 @@
     },
     {
       "content": "asdasd",
-      "important": false,
+      "important": true,
       "id": 8
     }
   ]
