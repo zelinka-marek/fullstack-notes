@@ -14,11 +14,13 @@ export function App() {
   }, []);
 
   const addNote = (newNote) => {
-    const noteObject = {
-      id: notes.length + 1,
-      ...newNote,
-    };
-    setNotes((notes) => notes.concat(noteObject));
+    fetch("http://localhost:3001/notes", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newNote),
+    })
+      .then((response) => response.json())
+      .then((note) => setNotes((notes) => notes.concat(note)));
   };
 
   return (
