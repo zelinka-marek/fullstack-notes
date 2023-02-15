@@ -17,12 +17,12 @@
     },
     {
       "content": "test",
-      "important": true,
+      "important": false,
       "id": 4
     },
     {
       "content": "test",
-      "important": false,
+      "important": true,
       "id": 5
     },
     {

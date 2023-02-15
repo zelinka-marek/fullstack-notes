@@ -15,13 +15,23 @@ export function App() {
 
   const toggleNote = (id) => {
     const note = notes.find((note) => note.id === id);
-    const newnote = { ...note, important: !note.important };
+    const newNote = { ...note, important: !note.important };
 
-    updateNote(id, newnote).then((updatedNote) => {
-      setNotes((notes) =>
-        notes.map((note) => (note.id === id ? updatedNote : note))
-      );
-    });
+    updateNote(id, newNote)
+      .then((updatedNote) => {
+        if (!updatedNote.id) {
+          throw new Error(
+            `the note "${note.content}" was already deleted from server`
+          );
+        }
+        setNotes((notes) =>
+          notes.map((note) => (note.id === id ? updatedNote : note))
+        );
+      })
+      .catch((error) => {
+        alert(error);
+        setNotes(notes.filter((note) => note.id !== id));
+      });
   };
 
   const addNote = (newNote) => {
