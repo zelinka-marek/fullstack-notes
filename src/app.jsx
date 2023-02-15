@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
 
-export function App(props) {
-  const { notes: initialNotes } = props;
-  const [notes, setNotes] = useState(initialNotes);
+export function App() {
+  const [notes, setNotes] = useState([]);
   const [showAll, setShowAll] = useState(true);
   const noteList = showAll ? notes : notes.filter((note) => note.important);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/notes")
+      .then((response) => response.json())
+      .then(setNotes);
+  }, []);
 
   const addNote = (newNote) => {
     const noteObject = {
