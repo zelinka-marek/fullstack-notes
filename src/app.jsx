@@ -3,7 +3,7 @@ import { ErrorAlert } from "./components/error-alert";
 import { NoteDetails } from "./components/note-details";
 import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
-import { getNotes, updateNote } from "./services/note";
+import { createNote, getNotes, updateNote } from "./services/note";
 
 function Footer() {
   const style = {
@@ -51,7 +51,7 @@ export function App() {
   };
 
   const addNote = (newNote) => {
-    addNote(newNote).then((createdNote) =>
+    createNote(newNote).then((createdNote) =>
       setNotes((notes) => notes.concat(createdNote))
     );
   };
