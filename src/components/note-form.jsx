@@ -26,6 +26,7 @@ export function NoteForm(props) {
         <input
           type="text"
           name="content"
+          required
           value={newNote.content}
           onChange={handleChange}
           aria-label="Content"
