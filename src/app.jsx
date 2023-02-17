@@ -57,21 +57,28 @@ export function App() {
   };
 
   return (
-    <>
-      <h1>Notes</h1>
-      {errorMessage && <ErrorAlert message={errorMessage} />}
-      <div>
-        <button type="button" onClick={() => setShowAll((showAll) => !showAll)}>
-          show {showAll ? "important" : "all"}
-        </button>
-      </div>
-      <NoteList
-        items={noteList}
-        renderNote={(note) => <NoteDetails note={note} onToggle={toggleNote} />}
-      />
-      <h2>Add Note</h2>
-      <NoteForm onSubmit={addNote} />
+    <div className="app">
+      <main>
+        <h1>Notes</h1>
+        {errorMessage && <ErrorAlert message={errorMessage} />}
+        <div>
+          <button
+            type="button"
+            onClick={() => setShowAll((showAll) => !showAll)}
+          >
+            show {showAll ? "important" : "all"}
+          </button>
+        </div>
+        <NoteList
+          items={noteList}
+          renderNote={(note) => (
+            <NoteDetails note={note} onToggle={toggleNote} />
+          )}
+        />
+        <h2>Add Note</h2>
+        <NoteForm onSubmit={addNote} />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }

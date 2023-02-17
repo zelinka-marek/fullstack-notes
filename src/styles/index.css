@@ -27,6 +27,12 @@ h1 {
   font-style: italic;
 }
 
+.app {
+  max-width: 640px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 /** <NoteDetails /> */
 .note {
   color: gray;
