@@ -13,25 +13,27 @@ function toJSON(response) {
 }
 
 export function getNotes() {
-  return toJSON(fetch(baseUrl));
+  const response = fetch(baseUrl);
+
+  return toJSON(response);
 }
 
 export function updateNote(id, data) {
-  return toJSON(
-    fetch(`${baseUrl}/${id}`, {
-      method: "put",
-      headers,
-      body: JSON.stringify(data),
-    })
-  );
+  const response = fetch(`${baseUrl}/${id}`, {
+    method: "put",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  return toJSON(response);
 }
 
 export function createNote(data) {
-  return toJSON(
-    fetch(baseUrl, {
-      method: "post",
-      headers,
-      body: JSON.stringify(data),
-    })
-  );
+  const response = fetch(baseUrl, {
+    method: "post",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  return toJSON(response);
 }
