@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001/api/notes";
+const baseUrl = "/api/notes";
 const headers = new Headers();
 headers.set("Content-Type", "application/json");
 
