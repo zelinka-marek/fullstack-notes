@@ -29,7 +29,7 @@ export function App() {
     getNotes().then(setNotes);
   }, []);
 
-  const setError = (message) => {
+  const notify = (message) => {
     setErrorMessage(message);
     setTimeout(() => setErrorMessage(null), 3500);
   };
@@ -45,7 +45,7 @@ export function App() {
         );
       })
       .catch(() => {
-        setError(`the note "${note.content}" was already deleted from server`);
+        notify(`the note "${note.content}" was already deleted from server`);
         setNotes(notes.filter((note) => note.id !== id));
       });
   };
