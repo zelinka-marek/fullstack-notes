@@ -1,20 +1,20 @@
 import { useState } from "react";
 
-const initialNote = { content: "", important: false };
+const initialValues = { content: "", important: false };
 
 export function NoteForm(props) {
   const { onSubmit } = props;
-  const [newNote, setNewNote] = useState(initialNote);
+  const [formData, setFormData] = useState(initialValues);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(newNote);
-    setNewNote(initialNote);
+    onSubmit(formData);
+    setFormData(initialValues);
   };
 
   const handleChange = (event) => {
     const { type, name } = event.target;
-    setNewNote((note) => ({
+    setFormData((note) => ({
       ...note,
       [name]: type === "checkbox" ? event.target.checked : event.target.value,
     }));
@@ -22,15 +22,16 @@ export function NoteForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Add Note</h2>
       <div>
         <input
           type="text"
           name="content"
           required
-          value={newNote.content}
+          value={formData.content}
           onChange={handleChange}
           aria-label="Content"
-        />
+        />{" "}
         <button type="submit">save</button>
       </div>
       <div>
@@ -39,7 +40,7 @@ export function NoteForm(props) {
           <input
             type="checkbox"
             name="important"
-            value={newNote.important}
+            value={formData.important}
             onChange={handleChange}
           />
         </label>

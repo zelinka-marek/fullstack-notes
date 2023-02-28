@@ -75,7 +75,6 @@ export function App() {
             <NoteDetails note={note} onToggle={toggleNote} />
           )}
         />
-        <h2>Add Note</h2>
         <NoteForm onSubmit={addNote} />
       </main>
       <Footer />
