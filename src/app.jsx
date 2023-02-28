@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { ErrorAlert } from "./components/error-alert";
 import { LoginForm } from "./components/login-form";
+import { LogoutForm } from "./components/logout-form";
 import { NoteDetails } from "./components/note-details";
 import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
 import { login } from "./services/login";
-import { createNote, getNotes, setToken, updateNote } from "./services/note";
+import { createNote, getNotes, updateNote } from "./services/note";
+import { getSavedUser, removeUser, saveUser } from "./utils/auth";
 
 function Footer() {
   const style = {
@@ -22,7 +24,7 @@ function Footer() {
 }
 
 export function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => getSavedUser(localStorage));
   const [notes, setNotes] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showAll, setShowAll] = useState(true);
@@ -31,6 +33,14 @@ export function App() {
   useEffect(() => {
     getNotes().then(setNotes);
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      saveUser(user);
+    } else {
+      removeUser(user);
+    }
+  }, [user]);
 
   const notify = (message) => {
     setErrorMessage(message);
@@ -61,11 +71,14 @@ export function App() {
     try {
       const user = await login(data);
 
-      setToken(user.token);
       setUser(user);
     } catch (error) {
       notify(`Wrong credentials, try again!`);
     }
+  };
+
+  const logoutUser = () => {
+    setUser(null);
   };
 
   return (
@@ -76,6 +89,7 @@ export function App() {
         {user ? (
           <>
             <p>Logged in as {user.name ?? user.username}.</p>
+            <LogoutForm onSubmit={logoutUser} />
             <NoteForm onSubmit={addNote} />
           </>
         ) : (
