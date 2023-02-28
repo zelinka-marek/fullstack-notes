@@ -5,7 +5,7 @@ import { NoteDetails } from "./components/note-details";
 import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
 import { login } from "./services/login";
-import { createNote, getNotes, updateNote } from "./services/note";
+import { createNote, getNotes, setToken, updateNote } from "./services/note";
 
 function Footer() {
   const style = {
@@ -60,6 +60,8 @@ export function App() {
   const loginUser = async (data) => {
     try {
       const user = await login(data);
+
+      setToken(user.token);
       setUser(user);
     } catch (error) {
       notify(`Wrong credentials, try again!`);
