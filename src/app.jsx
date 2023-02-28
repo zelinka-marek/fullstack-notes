@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { ErrorAlert } from "./components/error-alert";
+import { LoginForm } from "./components/login-form";
 import { NoteDetails } from "./components/note-details";
 import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
+import { login } from "./services/login";
 import { createNote, getNotes, updateNote } from "./services/note";
 
 function Footer() {
@@ -20,6 +22,7 @@ function Footer() {
 }
 
 export function App() {
+  const [user, setUser] = useState(null);
   const [notes, setNotes] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showAll, setShowAll] = useState(true);
@@ -50,10 +53,17 @@ export function App() {
       });
   };
 
-  const addNote = (newNote) => {
-    createNote(newNote).then((createdNote) =>
-      setNotes((notes) => notes.concat(createdNote))
-    );
+  const addNote = (data) => {
+    createNote(data).then((note) => setNotes((notes) => notes.concat(note)));
+  };
+
+  const loginUser = async (data) => {
+    try {
+      const user = await login(data);
+      setUser(user);
+    } catch (error) {
+      notify(`Wrong credentials, try again!`);
+    }
   };
 
   return (
@@ -61,7 +71,15 @@ export function App() {
       <main>
         <h1>Notes</h1>
         {errorMessage && <ErrorAlert message={errorMessage} />}
-        <div>
+        {user ? (
+          <>
+            <p>Logged in as {user.name ?? user.username}.</p>
+            <NoteForm onSubmit={addNote} />
+          </>
+        ) : (
+          <LoginForm onSubmit={loginUser} />
+        )}
+        <div style={{ marginTop: 16 }}>
           <button
             type="button"
             onClick={() => setShowAll((showAll) => !showAll)}
@@ -75,7 +93,6 @@ export function App() {
             <NoteDetails note={note} onToggle={toggleNote} />
           )}
         />
-        <NoteForm onSubmit={addNote} />
       </main>
       <Footer />
     </div>
