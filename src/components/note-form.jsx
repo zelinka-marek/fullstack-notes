@@ -6,9 +6,9 @@ export function NoteForm(props) {
   const { onSubmit } = props;
   const [formData, setFormData] = useState(initialValues);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(formData);
+    await onSubmit(formData);
     setFormData(initialValues);
   };
 
