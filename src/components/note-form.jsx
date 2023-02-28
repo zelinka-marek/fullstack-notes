@@ -8,12 +8,15 @@ export function NoteForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     await onSubmit(formData);
+
     setFormData(initialValues);
   };
 
   const handleChange = (event) => {
     const { type, name } = event.target;
+
     setFormData((note) => ({
       ...note,
       [name]: type === "checkbox" ? event.target.checked : event.target.value,
