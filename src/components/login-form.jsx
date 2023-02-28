@@ -44,7 +44,7 @@ export function LoginForm(props) {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">login</button>
+      <button type="submit">Login</button>
     </form>
   );
 }

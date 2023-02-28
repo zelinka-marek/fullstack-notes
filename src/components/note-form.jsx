@@ -35,7 +35,7 @@ export function NoteForm(props) {
           onChange={handleChange}
           aria-label="Content"
         />{" "}
-        <button type="submit">save</button>
+        <button type="submit">Save</button>
       </div>
       <div>
         <label>
