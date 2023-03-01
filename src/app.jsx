@@ -5,6 +5,7 @@ import { LogoutForm } from "./components/logout-form";
 import { NoteDetails } from "./components/note-details";
 import { NoteForm } from "./components/note-form";
 import { NoteList } from "./components/note-list";
+import { Togglable } from "./components/togglable";
 import { login } from "./services/login";
 import { createNote, getNotes, updateNote } from "./services/note";
 import { getSavedUser, removeUser, saveUser } from "./utils/auth";
@@ -95,22 +96,14 @@ export function App() {
               </p>
               <LogoutForm onSubmit={logoutUser} />
             </div>
-            <NoteForm onSubmit={addNote} />
+            <Togglable openButtonLabel="New note">
+              <NoteForm onSubmit={addNote} />
+            </Togglable>
           </>
         ) : (
-          <div>
-            <div style={{ display: loginVisible ? "none" : undefined }}>
-              <button type="button" onClick={() => setLoginVisible(true)}>
-                Sign in
-              </button>
-            </div>
-            <div style={{ display: loginVisible ? undefined : "none" }}>
-              <LoginForm onSubmit={loginUser} />
-              <button type="button" onClick={() => setLoginVisible(false)}>
-                Cancel
-              </button>
-            </div>
-          </div>
+          <Togglable openButtonLabel="Sign in">
+            <LoginForm onSubmit={loginUser} />
+          </Togglable>
         )}
         <div style={{ marginTop: 16 }}>
           <button
