@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
-export function Togglable(props) {
+export const Togglable = forwardRef((props, ref) => {
   const {
     openButtonLabel,
     closeButtonLabel = "Cancel",
@@ -14,6 +14,8 @@ export function Togglable(props) {
   const showWhenVisible = { display: visible ? undefined : "none" };
 
   const toggleVisibility = () => setVisible((visible) => !visible);
+
+  useImperativeHandle(ref, () => ({ toggleVisibility }));
 
   return (
     <div>
@@ -30,4 +32,6 @@ export function Togglable(props) {
       </div>
     </div>
   );
-}
+});
+
+Togglable.displayName = "Togglable";

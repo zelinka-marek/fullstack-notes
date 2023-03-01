@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ErrorAlert } from "./components/error-alert";
 import { LoginForm } from "./components/login-form";
 import { LogoutForm } from "./components/logout-form";
@@ -26,10 +26,15 @@ function Footer() {
 
 export function App() {
   const [user, setUser] = useState(() => getSavedUser(localStorage));
+
   const [notes, setNotes] = useState([]);
+
   const [errorMessage, setErrorMessage] = useState(null);
+
   const [showAll, setShowAll] = useState(true);
   const noteList = showAll ? notes : notes.filter((note) => note.important);
+
+  const noteFormRef = useRef(null);
 
   useEffect(() => {
     getNotes().then(setNotes);
@@ -64,8 +69,11 @@ export function App() {
       });
   };
 
-  const addNote = (data) => {
-    createNote(data).then((note) => setNotes((notes) => notes.concat(note)));
+  const addNote = async (data) => {
+    const note = await createNote(data);
+    setNotes((notes) => notes.concat(note));
+
+    noteFormRef.current.toggleVisibility();
   };
 
   const loginUser = async (data) => {
@@ -95,7 +103,7 @@ export function App() {
               </p>
               <LogoutForm onSubmit={logoutUser} />
             </div>
-            <Togglable openButtonLabel="New note">
+            <Togglable ref={noteFormRef} openButtonLabel="New note">
               <NoteForm onSubmit={addNote} />
             </Togglable>
           </>
