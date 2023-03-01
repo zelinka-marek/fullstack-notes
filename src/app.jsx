@@ -89,8 +89,12 @@ export function App() {
         {errorMessage && <ErrorAlert message={errorMessage} />}
         {user ? (
           <>
-            <p>Logged in as {user.name ?? user.username}.</p>
-            <LogoutForm onSubmit={logoutUser} />
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <p>
+                Logged in as <strong>{user.name ?? user.username}</strong>.
+              </p>
+              <LogoutForm onSubmit={logoutUser} />
+            </div>
             <NoteForm onSubmit={addNote} />
           </>
         ) : (

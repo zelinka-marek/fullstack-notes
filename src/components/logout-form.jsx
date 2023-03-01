@@ -9,7 +9,7 @@ export function LogoutForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <button type="submit">Logout</button>
+      <button type="submit">Sign out</button>
     </form>
   );
 }
