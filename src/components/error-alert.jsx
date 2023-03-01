@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export function ErrorAlert(props) {
   const { message } = props;
 
@@ -7,3 +9,7 @@ export function ErrorAlert(props) {
     </div>
   );
 }
+
+ErrorAlert.propTypes = {
+  message: PropTypes.string.isRequired,
+};

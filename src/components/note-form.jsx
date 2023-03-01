@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 
 const initialValues = { content: "", important: false };
@@ -51,3 +52,7 @@ export function NoteForm(props) {
     </form>
   );
 }
+
+NoteForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
