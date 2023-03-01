@@ -39,13 +39,13 @@ export function NoteForm(props) {
       </div>
       <div>
         <label>
-          Important?{" "}
           <input
             type="checkbox"
             name="important"
             value={formData.important}
             onChange={handleChange}
-          />
+          />{" "}
+          Important
         </label>
       </div>
     </form>
