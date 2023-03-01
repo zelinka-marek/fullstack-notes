@@ -27,6 +27,7 @@ export function App() {
   const [user, setUser] = useState(() => getSavedUser(localStorage));
   const [notes, setNotes] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loginVisible, setLoginVisible] = useState(false);
   const [showAll, setShowAll] = useState(true);
   const noteList = showAll ? notes : notes.filter((note) => note.important);
 
@@ -93,7 +94,19 @@ export function App() {
             <NoteForm onSubmit={addNote} />
           </>
         ) : (
-          <LoginForm onSubmit={loginUser} />
+          <div>
+            <div style={{ display: loginVisible ? "none" : undefined }}>
+              <button type="button" onClick={() => setLoginVisible(true)}>
+                Sign in
+              </button>
+            </div>
+            <div style={{ display: loginVisible ? undefined : "none" }}>
+              <LoginForm onSubmit={loginUser} />
+              <button type="button" onClick={() => setLoginVisible(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
         )}
         <div style={{ marginTop: 16 }}>
           <button
