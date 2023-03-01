@@ -28,7 +28,6 @@ export function App() {
   const [user, setUser] = useState(() => getSavedUser(localStorage));
   const [notes, setNotes] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [loginVisible, setLoginVisible] = useState(false);
   const [showAll, setShowAll] = useState(true);
   const noteList = showAll ? notes : notes.filter((note) => note.important);
 
