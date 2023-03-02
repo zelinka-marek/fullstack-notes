@@ -9,6 +9,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./setup-tests.js",
     css: false,
+    coverage: {
+      provider: "istanbul",
+    },
   },
   server: {
     proxy: {

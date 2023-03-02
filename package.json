@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
+    "coverage": "vitest run --coverage",
     "lint": "eslint ."
   },
   "prettier": {},
@@ -24,6 +25,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "@vitest/coverage-istanbul": "^0.29.2",
     "eslint": "^8.35.0",
     "eslint-config-react-app": "^7.0.1",
     "jsdom": "^21.1.0",
