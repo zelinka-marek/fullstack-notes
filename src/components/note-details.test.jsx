@@ -32,6 +32,7 @@ describe("<NoteDetails />", () => {
       name: /make not important/i,
     });
     await userEvent.click(button);
+
     expect(onToggle).toHaveBeenCalledTimes(1);
   });
 });
