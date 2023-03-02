@@ -98,9 +98,7 @@ export function App() {
         {user ? (
           <>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <p>
-                Logged in as <b>{user.name ?? user.username}</b>.
-              </p>
+              <p>Logged in as {user.name ?? user.username}.</p>
               <LogoutForm onSubmit={logoutUser} />
             </div>
             <Togglable ref={noteFormRef} openButtonLabel="New note">

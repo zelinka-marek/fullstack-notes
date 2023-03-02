@@ -1,7 +1,24 @@
 describe("Note app", () => {
-  it("front page can be opened", () => {
+  beforeEach(() => {
     cy.visit("http://localhost:5173/");
+  });
+
+  it("should be able to open the front page", () => {
     cy.findByText("Notes").should("exist");
     cy.findByText("FullStack - Note, Marek Zelinka, © 2023").should("exist");
+  });
+
+  it("should open the login form when clicked", () => {
+    cy.findByRole("button", { name: /sign in/i }).click();
+  });
+
+  it("should allow users to log in", () => {
+    cy.findByRole("button", { name: /sign in/i }).click();
+
+    cy.findByRole("textbox", { name: /username/i }).type("root");
+    cy.findByLabelText(/password/i).type("123456");
+    cy.findByRole("button", { name: /sign in/i }).click();
+
+    cy.findByText("Logged in as root.").should("exist");
   });
 });
