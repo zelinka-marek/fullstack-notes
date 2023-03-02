@@ -8,12 +8,11 @@ describe("<NoteForm />", () => {
     cleanup();
   });
 
-  it("should call onSubmit when submit button is clicked", async () => {
-    const onSubmit = vi.fn();
-
-    render(<NoteForm onSubmit={onSubmit} />);
-
+  it("should call onSubmit with right data", async () => {
     const content = "testing a form...";
+
+    const onSubmit = vi.fn();
+    render(<NoteForm onSubmit={onSubmit} />);
 
     const input = screen.getByRole("textbox", { name: /content/i });
     await userEvent.type(input, content);
@@ -26,11 +25,10 @@ describe("<NoteForm />", () => {
   });
 
   it("should create an important note", async () => {
-    const onSubmit = vi.fn();
-
-    render(<NoteForm onSubmit={onSubmit} />);
-
     const content = "testing a form...";
+
+    const onSubmit = vi.fn();
+    render(<NoteForm onSubmit={onSubmit} />);
 
     const input = screen.getByRole("textbox", { name: /content/i });
     await userEvent.type(input, content);

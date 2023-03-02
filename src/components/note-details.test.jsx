@@ -25,7 +25,6 @@ describe("<NoteDetails />", () => {
     };
 
     const onToggle = vi.fn();
-
     render(<NoteDetails note={note} onToggle={onToggle} />);
 
     const button = screen.getByRole("button", {
