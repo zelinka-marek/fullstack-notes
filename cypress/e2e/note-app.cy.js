@@ -21,4 +21,28 @@ describe("Note app", () => {
 
     cy.findByText("Logged in as root.").should("exist");
   });
+
+  describe("when logged in", () => {
+    beforeEach(() => {
+      cy.findByRole("button", { name: /sign in/i }).click();
+
+      cy.findByRole("textbox", { name: /username/i }).type("root");
+      cy.findByLabelText(/password/i).type("123456");
+      cy.findByRole("button", { name: /sign in/i }).click();
+
+      cy.findByText("Logged in as root.").should("exist");
+    });
+
+    it("should create a new note when form is submitted", () => {
+      const newNoteContent = "new note created by cypress...";
+      cy.findByRole("button", { name: /new note/i }).click();
+
+      cy.findByRole("textbox", { name: /content/i }).type(
+        "new note created by cypress..."
+      );
+      cy.findByRole("button", { name: /save/i }).click();
+
+      cy.findByText(newNoteContent).should("exist");
+    });
+  });
 });
