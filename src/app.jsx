@@ -19,7 +19,7 @@ function Footer() {
 
   return (
     <footer style={style}>
-      <em>FullStack - Note, Marek Zelinka, &copy; 2023 </em>
+      <em>FullStack - Note, Marek Zelinka, &copy; 2023</em>
     </footer>
   );
 }
@@ -99,7 +99,7 @@ export function App() {
           <>
             <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
               <p>
-                Logged in as <strong>{user.name ?? user.username}</strong>.
+                Logged in as <b>{user.name ?? user.username}</b>.
               </p>
               <LogoutForm onSubmit={logoutUser} />
             </div>
