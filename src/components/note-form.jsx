@@ -39,15 +39,14 @@ export function NoteForm(props) {
         <button type="submit">Save</button>
       </div>
       <div>
-        <label>
-          <input
-            type="checkbox"
-            name="important"
-            value={formData.important}
-            onChange={handleChange}
-          />{" "}
-          Important
-        </label>
+        <label htmlFor="important">Important</label>{" "}
+        <input
+          type="checkbox"
+          name="important"
+          id="important"
+          value={formData.important}
+          onChange={handleChange}
+        />
       </div>
     </form>
   );
