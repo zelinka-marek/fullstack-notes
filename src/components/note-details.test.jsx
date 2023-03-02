@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NoteDetails } from "./note-details";
 
-describe("NoteDetails", () => {
+describe("<NoteDetails />", () => {
   beforeEach(() => {
     cleanup();
   });
