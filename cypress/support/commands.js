@@ -30,7 +30,7 @@ Cypress.Commands.add("login", (credentials) => {
     ({ body }) => {
       localStorage.setItem("loggedInUser", JSON.stringify(body));
 
-      cy.visit("http://localhost:5173/");
+      cy.visit("");
     }
   );
 });
@@ -47,5 +47,5 @@ Cypress.Commands.add("createNote", (note) => {
     },
   });
 
-  cy.visit("http://localhost:5173/");
+  cy.visit("");
 });

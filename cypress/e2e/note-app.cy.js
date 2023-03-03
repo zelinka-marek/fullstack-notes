@@ -6,7 +6,7 @@ describe("Note app", () => {
       username: "mluukkai",
       password: "salainen",
     });
-    cy.visit("http://localhost:5173/");
+    cy.visit("");
   });
 
   it("should be able to open the front page", () => {
