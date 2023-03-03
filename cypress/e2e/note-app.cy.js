@@ -10,12 +10,16 @@ describe("Note app", () => {
   });
 
   it("should be able to open the front page", () => {
-    cy.findByText("Notes").should("exist");
-    cy.findByText("FullStack - Note, Marek Zelinka, © 2023").should("exist");
+    cy.findByText(/notes/i).should("exist");
+    cy.findByText(/fullStack - note, marek zelinka, © 2023/i).should("exist");
   });
 
   it("should open the login form when clicked", () => {
     cy.findByRole("button", { name: /sign in/i }).click();
+
+    cy.findByRole("textbox", { name: /username/i }).should("exist");
+    cy.findByLabelText(/password/i).should("exist");
+    cy.findByRole("button", { name: /sign in/i }).should("exist");
   });
 
   it("should allow users to log in", () => {
@@ -36,7 +40,7 @@ describe("Note app", () => {
       cy.findByLabelText(/password/i).type("salainen");
       cy.findByRole("button", { name: /sign in/i }).click();
 
-      cy.findByText("Logged in as Matti Luukkainen.").should("exist");
+      cy.findByText(/logged in as Matti Luukkainen/i).should("exist");
     });
 
     it("should create a new note when form is submitted", () => {
@@ -51,22 +55,22 @@ describe("Note app", () => {
       cy.findByText(newNoteContent).should("exist");
     });
 
-    describe("and a note exists", () => {
+    describe("a saved note exists", () => {
+      const newNoteContent = "new note created by cypress...";
+
       beforeEach(() => {
         cy.findByRole("button", { name: /new note/i }).click();
 
-        cy.findByRole("textbox", { name: /content/i }).type(
-          "another new note created by cypress..."
-        );
+        cy.findByRole("textbox", { name: /content/i }).type(newNoteContent);
         cy.findByRole("button", { name: /save/i }).click();
       });
 
       it("should be able to make it important", () => {
-        cy.findByText("another new note created by cypress...")
+        cy.findByText(newNoteContent)
           .findByRole("button", { name: /make important/i })
           .click();
 
-        cy.findByText("another new note created by cypress...")
+        cy.findByText(newNoteContent)
           .findByRole("button", { name: /make not important/i })
           .should("exist");
       });
