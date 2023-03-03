@@ -50,5 +50,26 @@ describe("Note app", () => {
 
       cy.findByText(newNoteContent).should("exist");
     });
+
+    describe("and a note exists", () => {
+      beforeEach(() => {
+        cy.findByRole("button", { name: /new note/i }).click();
+
+        cy.findByRole("textbox", { name: /content/i }).type(
+          "another new note created by cypress..."
+        );
+        cy.findByRole("button", { name: /save/i }).click();
+      });
+
+      it("should be able to make it important", () => {
+        cy.findByText("another new note created by cypress...")
+          .findByRole("button", { name: /make important/i })
+          .click();
+
+        cy.findByText("another new note created by cypress...")
+          .findByRole("button", { name: /make not important/i })
+          .should("exist");
+      });
+    });
   });
 });
