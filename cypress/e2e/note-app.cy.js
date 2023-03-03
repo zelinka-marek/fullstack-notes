@@ -35,7 +35,7 @@ describe("Note app", () => {
       cy.findByText(/logged in as Matti Luukkainen/i).should("exist");
     });
 
-    it.only("fails with error message if credentails are invalid", () => {
+    it("fails with error message if credentails are invalid", () => {
       cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
       cy.findByLabelText(/password/i).type("wrongpassword");
       cy.findByRole("button", { name: /sign in/i }).click();
