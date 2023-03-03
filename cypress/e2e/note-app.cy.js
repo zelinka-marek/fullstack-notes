@@ -47,13 +47,7 @@ describe("Note app", () => {
 
   describe("when logged in", () => {
     beforeEach(() => {
-      cy.findByRole("button", { name: /sign in/i }).click();
-
-      cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
-      cy.findByLabelText(/password/i).type("salainen");
-      cy.findByRole("button", { name: /sign in/i }).click();
-
-      cy.findByText(/logged in as Matti Luukkainen/i).should("exist");
+      cy.login({ username: "mluukkai", password: "salainen" });
     });
 
     it("should create a new note when form is submitted", () => {

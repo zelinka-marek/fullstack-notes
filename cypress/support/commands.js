@@ -24,3 +24,14 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import "@testing-library/cypress/add-commands";
+
+Cypress.Commands.add("login", (credentials) => {
+  cy.request("post", "http://localhost:3001/api/login", credentials).then(
+    ({ body }) => {
+      localStorage.setItem("loggedInUser", JSON.stringify(body));
+
+      cy.visit("http://localhost:5173/");
+    }
+  );
+});
+
