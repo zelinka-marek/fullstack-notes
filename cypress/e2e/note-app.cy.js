@@ -1,5 +1,11 @@
 describe("Note app", () => {
   beforeEach(() => {
+    cy.request("post", "http://localhost:3001/api/testing/reset");
+    cy.request("post", "http://localhost:3001/api/users/", {
+      name: "Matti Luukkainen",
+      username: "mluukkai",
+      password: "salainen",
+    });
     cy.visit("http://localhost:5173/");
   });
 
@@ -15,22 +21,22 @@ describe("Note app", () => {
   it("should allow users to log in", () => {
     cy.findByRole("button", { name: /sign in/i }).click();
 
-    cy.findByRole("textbox", { name: /username/i }).type("root");
-    cy.findByLabelText(/password/i).type("123456");
+    cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
+    cy.findByLabelText(/password/i).type("salainen");
     cy.findByRole("button", { name: /sign in/i }).click();
 
-    cy.findByText("Logged in as root.").should("exist");
+    cy.findByText("Logged in as Matti Luukkainen.").should("exist");
   });
 
   describe("when logged in", () => {
     beforeEach(() => {
       cy.findByRole("button", { name: /sign in/i }).click();
 
-      cy.findByRole("textbox", { name: /username/i }).type("root");
-      cy.findByLabelText(/password/i).type("123456");
+      cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
+      cy.findByLabelText(/password/i).type("salainen");
       cy.findByRole("button", { name: /sign in/i }).click();
 
-      cy.findByText("Logged in as root.").should("exist");
+      cy.findByText("Logged in as Matti Luukkainen.").should("exist");
     });
 
     it("should create a new note when form is submitted", () => {
