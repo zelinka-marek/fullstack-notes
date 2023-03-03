@@ -35,3 +35,17 @@ Cypress.Commands.add("login", (credentials) => {
   );
 });
 
+Cypress.Commands.add("createNote", (note) => {
+  const token = JSON.parse(localStorage.getItem("loggedInUser")).token;
+
+  cy.request({
+    url: "http://localhost:3001/api/notes",
+    method: "post",
+    body: note,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  cy.visit("http://localhost:5173/");
+});

@@ -61,22 +61,22 @@ describe("Note app", () => {
     });
 
     describe("a saved note exists", () => {
-      const newNoteContent = "new note created by cypress...";
+      const note = {
+        content: "another note cypress",
+        important: true,
+      };
 
       beforeEach(() => {
-        cy.findByRole("button", { name: /new note/i }).click();
-
-        cy.findByRole("textbox", { name: /content/i }).type(newNoteContent);
-        cy.findByRole("button", { name: /save/i }).click();
+        cy.createNote(note);
       });
 
       it("should be able to make it important", () => {
-        cy.findByText(newNoteContent)
-          .findByRole("button", { name: /make important/i })
+        cy.findByText(note.content)
+          .findByRole("button", { name: /make not important/i })
           .click();
 
-        cy.findByText(newNoteContent)
-          .findByRole("button", { name: /make not important/i })
+        cy.findByText(note.content)
+          .findByRole("button", { name: /make important/i })
           .should("exist");
       });
     });
