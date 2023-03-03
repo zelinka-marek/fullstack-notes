@@ -60,9 +60,7 @@ describe("Note app", () => {
       const newNoteContent = "new note created by cypress...";
       cy.findByRole("button", { name: /new note/i }).click();
 
-      cy.findByRole("textbox", { name: /content/i }).type(
-        "new note created by cypress..."
-      );
+      cy.findByRole("textbox", { name: /content/i }).type(newNoteContent);
       cy.findByRole("button", { name: /save/i }).click();
 
       cy.findByText(newNoteContent).should("exist");
