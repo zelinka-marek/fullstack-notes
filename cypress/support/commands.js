@@ -26,7 +26,7 @@
 import "@testing-library/cypress/add-commands";
 
 Cypress.Commands.add("login", (credentials) => {
-  cy.request("post", "http://localhost:3001/api/login", credentials).then(
+  cy.request("post", `${Cypress.env("BACKEND")}/login`, credentials).then(
     ({ body }) => {
       localStorage.setItem("loggedInUser", JSON.stringify(body));
 
@@ -39,7 +39,7 @@ Cypress.Commands.add("createNote", (note) => {
   const token = JSON.parse(localStorage.getItem("loggedInUser")).token;
 
   cy.request({
-    url: "http://localhost:3001/api/notes",
+    url: `${Cypress.env("BACKEND")}/notes`,
     method: "post",
     body: note,
     headers: {

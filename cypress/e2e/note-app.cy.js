@@ -1,7 +1,7 @@
 describe("Note app", () => {
   beforeEach(() => {
-    cy.request("post", "http://localhost:3001/api/testing/reset");
-    cy.request("post", "http://localhost:3001/api/users/", {
+    cy.request("post", `${Cypress.env("BACKEND")}/testing/reset`);
+    cy.request("post", `${Cypress.env("BACKEND")}/users/`, {
       name: "Matti Luukkainen",
       username: "mluukkai",
       password: "salainen",
