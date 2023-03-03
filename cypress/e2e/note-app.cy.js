@@ -22,14 +22,27 @@ describe("Note app", () => {
     cy.findByRole("button", { name: /sign in/i }).should("exist");
   });
 
-  it("should allow users to log in", () => {
-    cy.findByRole("button", { name: /sign in/i }).click();
+  describe("logging in", () => {
+    beforeEach(() => {
+      cy.findByRole("button", { name: /sign in/i }).click();
+    });
 
-    cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
-    cy.findByLabelText(/password/i).type("salainen");
-    cy.findByRole("button", { name: /sign in/i }).click();
+    it("succeeds if credentials are valid", () => {
+      cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
+      cy.findByLabelText(/password/i).type("salainen");
+      cy.findByRole("button", { name: /sign in/i }).click();
 
-    cy.findByText("Logged in as Matti Luukkainen.").should("exist");
+      cy.findByText(/logged in as Matti Luukkainen/i).should("exist");
+    });
+
+    it.only("fails with error message if credentails are invalid", () => {
+      cy.findByRole("textbox", { name: /username/i }).type("mluukkai");
+      cy.findByLabelText(/password/i).type("wrongpassword");
+      cy.findByRole("button", { name: /sign in/i }).click();
+
+      cy.findByText(/wrong credentials/i).should("exist");
+      cy.findByText(/logged in as Matti Luukkainen/i).should("not.exist");
+    });
   });
 
   describe("when logged in", () => {
